@@ -25,8 +25,8 @@ const CONFIG = {
   // 写真を自分のものに変えたいとき：
   // 同じフォルダに写真（例 photo.jpg）を置き、下に 'photo.jpg' と書く。
   // 空のままなら、内蔵のイラスト（山と空）を使う。
-  photoUrl: '',
-  photoAlt: '山と空の写真',
+  photoUrl: 'photo.png',
+  photoAlt: '黄色いビートルの写真',
 };
 
 /* =====================================================================
@@ -814,6 +814,11 @@ function returnTo(screen) {
   nav = found || { screen, step: 0 };
   render();
 }
+function home() {
+  navStack.push(nav);
+  nav = { screen: 'start', step: 0 };
+  render();
+}
 function restart() {
   Object.assign(state, freshState());
   navStack.length = 0;
@@ -1128,11 +1133,12 @@ function predictView(exp, idx) {
   const def = step.stage();
   const stage = buildStage(def.nodes, { linkLabels: def.linkLabels });
   def.init(stage);
-  inner.append(h('div', { class: 'stage-wrap compact' }, stage.root));
+  const stagePanel = h('div', { class: 'stage-wrap compact predict-stage' }, stage.root);
 
   const hint = h('p', { class: 'saved-hint', 'aria-live': 'polite' });
   const next = bigBtn(C.common.next, () => go(nav.screen, nav.step + 1), { iconRight: 'arrowRight', disabled: true });
   const list = h('div', { class: 'choice-list' });
+  const choicePanel = h('div', { class: 'predict-choice-panel' }, list, hint);
   const draw = () => {
     const sel = state.pred[step.key];
     list.replaceChildren(...c.options.map(o => choiceBtn({
@@ -1143,7 +1149,7 @@ function predictView(exp, idx) {
     hint.textContent = sel ? C.common.saved : '';
   };
   draw();
-  inner.append(list, hint);
+  inner.append(h('div', { class: 'predict-layout' }, stagePanel, choicePanel));
   return screenEl(inner, [next]);
 }
 
@@ -1662,6 +1668,7 @@ const VIEWS = {
 };
 
 document.getElementById('btn-back').addEventListener('click', back);
+document.getElementById('btn-home').addEventListener('click', home);
 render();
 
 })();

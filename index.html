@@ -19,12 +19,17 @@
 
     <!-- 上のバー：もどるボタン ／ アプリ名 ／ 今どこを学習しているか -->
     <header class="topbar">
+      <div class="topbar-nav">
+      <button type="button" class="btn btn-secondary btn-home" id="btn-home" aria-label="最初の画面にもどる">
+        <span aria-hidden="true">⌂</span><span>最初にもどる</span>
+      </button>
       <button type="button" class="btn btn-secondary btn-back" id="btn-back" aria-label="ひとつ前にもどる" hidden>
         <span class="icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
         </span>
         <span>もどる</span>
       </button>
+      </div>
 
       <div class="brand" aria-label="WhereData">
         <span class="brand-mark" aria-hidden="true">
@@ -34,6 +39,7 @@
       </div>
 
       <nav class="progress" id="progress" aria-label="学習の進み具合"></nav>
+      <div class="yanyu-logo" aria-label="YANYU 725"><span>YANYU</span><strong>725</strong></div>
     </header>
 
     <!-- 各画面がここに入ります -->
