@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhereData ― データはどこへ？</title>
+  <meta name="description" content="写真を「送る」「クラウドに保存する」「Webで公開する」体験を通して、Webサービスでのデータの動きを学ぶ教材です。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231F6FEB'/%3E%3Cpath d='M16 6a7 7 0 0 0-7 7c0 5.5 7 12 7 12s7-6.5 7-12a7 7 0 0 0-7-7z' fill='%23fff'/%3E%3Ccircle cx='16' cy='13' r='2.6' fill='%231F6FEB'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!--
+    画面の骨組みです。
+    中身（各画面）は script.js が #screen の中に切り替えて表示します。
+    文章や問題を変えたいときは script.js の「教材データ（C）」を編集してください。
+  -->
+  <div class="app">
+
+    <!-- 上のバー：もどるボタン ／ アプリ名 ／ 今どこを学習しているか -->
+    <header class="topbar">
+      <button type="button" class="btn btn-secondary btn-back" id="btn-back" aria-label="ひとつ前にもどる" hidden>
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        </span>
+        <span>もどる</span>
+      </button>
+
+      <div class="brand" aria-label="WhereData">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        <span class="brand-name">WhereData</span>
+      </div>
+
+      <nav class="progress" id="progress" aria-label="学習の進み具合"></nav>
+    </header>
+
+    <!-- 各画面がここに入ります -->
+    <main class="main" id="screen"></main>
+  </div>
+
+  <noscript>
+    <p style="padding:24px;font-size:20px">このアプリは JavaScript を使います。ブラウザの設定で JavaScript を有効にしてください。</p>
+  </noscript>
+
+  <script src="script.js"></script>
+</body>
+</html>
