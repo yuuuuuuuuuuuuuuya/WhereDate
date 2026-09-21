@@ -1392,7 +1392,7 @@ function compareView() {
 /* ---------- 共通点を考える画面 ---------- */
 function commonView() {
   const c = C.common3, S = state.common;
-  const inner = h('div', { class: 'screen-inner' });
+  const inner = h('div', { class: 'screen-inner common-screen' });
   inner.append(h('h1', { tabindex: '-1' }, c.title), h('p', { class: 'lead' }, c.lead));
 
   const hub = h('div', { class: 'hub-wrap' });
@@ -1455,7 +1455,7 @@ function commonView() {
 
   function drawAll() { drawHub(); drawQ(); next.disabled = !(S.solved && allWords()); }
   drawAll();
-  inner.append(hub, qArea);
+  inner.append(h('div', { class: 'common-body' }, hub, qArea));
   return screenEl(inner, [next]);
 }
 

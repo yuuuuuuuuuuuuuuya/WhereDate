@@ -851,3 +851,72 @@ body[data-screen="start"] .brand { visibility: hidden; }
   .yanyu-logo { width: 88px; height: 40px; max-width: 88px; max-height: 40px; flex-basis: 88px; }
   .yanyu-logo img { width: 88px !important; height: 40px !important; max-width: 88px !important; max-height: 40px !important; }
 }
+
+/* =====================================================================
+   2026-09-21 授業画面の見やすさ調整
+   1) Webサービス欄の窮屈さを解消
+   2) 公開画面の「見られる人」を枠内に収める
+   3) まとめ画面を横並びにしてスクロール量を減らす
+   ===================================================================== */
+
+/* Webサービスは名称と3つの処理が読みやすい幅を確保 */
+.node-service {
+  min-width: 13.5rem;
+  max-width: 18rem;
+  padding-left: .85rem;
+  padding-right: .85rem;
+}
+.node-service .node-name { white-space: nowrap; font-size: 1rem; }
+.node-service .phase { font-size: .9rem; line-height: 1.25; padding: .35rem .55rem; }
+
+/* 公開画面：見る人の列が横にはみ出さないように圧縮 */
+.node-audience {
+  min-width: 0;
+  max-width: 18rem;
+  padding-left: .45rem;
+  padding-right: .45rem;
+}
+.node-audience .audience-grid { gap: .45rem .2rem; }
+.node-audience .avatar-face { width: 2.75rem; height: 2.75rem; border-width: 2px; }
+.node-audience .avatar-face .icon { width: 1.45rem; height: 1.45rem; }
+.node-audience .avatar-name { font-size: .75rem; overflow-wrap: anywhere; }
+.node-audience .avatar-state { font-size: .72rem; }
+
+/* 横長PCでは矢印部分を少し短くして、3つの箱を画面内へ */
+@media (min-width: 901px) {
+  .stage > .link { flex-basis: clamp(1.8rem, 4vw, 3.5rem); }
+  .stage > .link.has-label { flex-basis: clamp(4rem, 8vw, 6rem); }
+}
+
+/* まとめ：図と問いを同時に見られるようにする */
+.common-screen { max-width: 1500px; }
+.common-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(20rem, .65fr);
+  gap: 1rem;
+  align-items: start;
+}
+.common-body .hub-wrap,
+.common-body .q-area { min-width: 0; }
+.common-body .hub-wrap { margin: 0; }
+.common-body .qpanel { margin-top: 0; }
+.common-body .choice-list { gap: .55rem; }
+.common-body .choice { min-height: 3.5rem; padding: .5rem .8rem; font-size: 1rem; }
+.common-body .word-card.big { font-size: 1.15rem; min-height: 3.5rem; padding: .4rem 1.15rem; }
+.common-body .conclusion { margin-top: .65rem; padding: .8rem 1rem; font-size: 1.05rem; line-height: 1.55; }
+
+@media (min-width: 900px) and (max-height: 900px) {
+  .common-screen { padding-top: .65rem; padding-bottom: .65rem; }
+  .common-screen h1 { margin-bottom: .2rem; }
+  .common-screen .lead { margin-bottom: .4rem; }
+  .common-body .hub { padding: .65rem; }
+  .common-body .hub-photo { width: 4.2rem; }
+  .common-body .hub-dest { min-height: 3.7rem; padding: .4rem .65rem; }
+  .common-body .hub-dest-icon { width: 2.15rem; height: 2.15rem; }
+}
+
+@media (max-width: 899px) {
+  .common-body { grid-template-columns: 1fr; }
+  .node-service { min-width: 0; width: 100%; max-width: 20rem; }
+  .node-audience { width: 100%; max-width: 20rem; }
+}
