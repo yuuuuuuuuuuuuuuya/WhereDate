@@ -920,3 +920,44 @@ body[data-screen="start"] .brand { visibility: hidden; }
   .node-service { min-width: 0; width: 100%; max-width: 20rem; }
   .node-audience { width: 100%; max-width: 20rem; }
 }
+
+/* 2026-09-21 公開画面：見られる人を2列×3段に固定してはみ出し防止 */
+.node-audience {
+  flex: 1.45 1 0;
+  min-width: 9.5rem;
+  max-width: 11.5rem;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.node-audience .audience-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: .55rem .35rem !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  padding: .25rem .1rem !important;
+  box-sizing: border-box;
+}
+.node-audience .avatar {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+}
+.node-audience .avatar-face {
+  width: 2.65rem !important;
+  height: 2.65rem !important;
+  flex: 0 0 auto;
+}
+.node-audience .avatar-name {
+  width: 100%;
+  font-size: .72rem !important;
+  line-height: 1.2 !important;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+.node-audience .avatar-state {
+  font-size: .68rem !important;
+  line-height: 1.15;
+}
