@@ -40,7 +40,7 @@ const CONFIG = {
 const C = {
 
   /* 画面上部の「いまどこ？」に出る 5 つの区切り */
-  sections: ['はじめ', '体験', 'くらべる', 'まとめ', 'ふりかえり'],
+  sections: ['はじめ', '体験', 'まとめ', 'ふりかえり'],
 
   /* 共通の言葉 */
   common: {
@@ -76,8 +76,8 @@ const C = {
     ],
     todo: 'やってみよう',
     done: 'できた',
-    compare: '3つをくらべる',
-    left: n => `あと ${n}つ やると おせるよ`,
+    finish: 'まとめへ進む',
+    left: n => `あと ${n}つ 体験しよう`,
     all: '3つ できたね！',
   },
 
@@ -796,7 +796,7 @@ const state = freshState();
 let nav = { screen: 'start', step: 0 };
 const navStack = [];
 
-const SECTION_OF = { start: 0, choose: 1, send: 1, cloud: 1, publish: 1, compare: 2, common: 3, words: 3, final: 4 };
+const SECTION_OF = { start: 0, choose: 1, send: 1, cloud: 1, publish: 1, common: 2, words: 2, final: 3 };
 
 function go(screen, step = 0) { navStack.push(nav); nav = { screen, step }; render(); }
 function back() {
@@ -1292,9 +1292,29 @@ function chooseView() {
   inner.append(h('div', { class: 'choose-grid' }, h('div', { class: 'photo-frame' }, photoEl()), list));
 
   const left = c.items.filter(it => !state.done[it.id]).length;
-  const btn = bigBtn(c.compare, () => go('compare'), { iconRight: 'arrowRight', disabled: left > 0 });
+  const btn = bigBtn(c.finish, () => go('common'), { iconRight: 'arrowRight', disabled: left > 0 });
   const hint = h('span', { class: 'need-hint' }, left > 0 ? c.left(left) : c.all);
   return screenEl(inner, [h('div', { class: 'main-action' }, hint, btn)]);
+}
+
+/* ---------- 体験完了画面 ---------- */
+function finishView() {
+  const inner = h('div', { class: 'screen-inner finish-screen' });
+  inner.append(
+    h('div', { class: 'finish-card' },
+      h('div', { class: 'finish-check', 'aria-hidden': 'true' }, icon('check')),
+      h('h1', { tabindex: '-1' }, '3つの体験ができました！'),
+      h('p', { class: 'lead' }, 'プリントで、気づいたことをまとめよう。'),
+      h('div', { class: 'finish-list' }, C.choose.items.map(it =>
+        h('div', { class: 'finish-item' },
+          h('span', { class: 'finish-emoji', 'aria-hidden': 'true' }, it.emoji),
+          h('span', {}, it.label),
+          h('span', { class: 'finish-done' }, icon('check'), '体験した')
+        )
+      ))
+    )
+  );
+  return screenEl(inner, [bigBtn('えらぶ画面へ', () => returnTo('choose'), { secondary: true, iconLeft: 'arrowLeft' })]);
 }
 
 /* ---------- 比較画面 ---------- */
@@ -1661,7 +1681,6 @@ const VIEWS = {
   send: s => experienceView(EXP.send, s),
   cloud: s => experienceView(EXP.cloud, s),
   publish: s => experienceView(EXP.publish, s),
-  compare: compareView,
   common: commonView,
   words: wordsView,
   final: finalView,
